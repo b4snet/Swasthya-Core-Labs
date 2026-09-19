@@ -1,0 +1,9 @@
+@Swasthya.CoreLabs.Api_HostAddress = http://localhost:5249
+
+GET {{Swasthya.CoreLabs.Api_HostAddress}}/health
+
+###
+
+GET {{Swasthya.CoreLabs.Api_HostAddress}}/version-info
+
+###

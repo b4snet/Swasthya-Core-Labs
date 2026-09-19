@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: ${{ matrix.os }} (${{ matrix.tests || 'all tests' }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        include:
+          # Ubuntu also runs the PostgreSQL-backed (Category=Db) suite.
+          - os: ubuntu-latest
+            tests: 'all tests'
+            SCL_PG_TEST_CONNECTION: 'Host=localhost;Port=5432;Database=swasthya_core_labs;Username=postgres;Password=postgres'
+          - os: windows-latest
+            tests: 'Category!=Db'
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: swasthya_core_labs
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+          dotnet-quality: 'ga'
+
+      - name: Restore
+        run: dotnet restore Swasthya.CoreLabs.slnx --nologo
+
+      - name: Format
+        run: dotnet format Swasthya.CoreLabs.slnx --verify-no-changes --no-restore
+
+      - name: Build
+        run: dotnet build Swasthya.CoreLabs.slnx -c Release --no-restore -warnaserror --nologo
+
+      - name: Test
+        run: dotnet test Swasthya.CoreLabs.slnx -c Release --no-build --nologo --filter "${{ matrix.tests }}"
+        env:
+          SCL_PG_TEST_CONNECTION: ${{ matrix.SCL_PG_TEST_CONNECTION }}
+
+      - name: Vulnerability scan
+        run: dotnet list Swasthya.CoreLabs.slnx package --vulnerable --include-transitive
+
+  secrets:
+    name: Secret scan (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

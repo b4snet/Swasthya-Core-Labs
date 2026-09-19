@@ -1,0 +1,24 @@
+Swasthya Core Labs — Proprietary Software License
+Copyright (c) 2026 Swasthya Core Labs. All rights reserved.
+
+PROPRIETARY NOTICE
+------------------
+This software and its associated documentation are proprietary and
+confidential. Redistribution, modification, reverse engineering, or use
+outside the terms of a written commercial license agreement is prohibited
+unless explicitly authorized in writing by Swasthya Core Labs.
+
+This is a placeholder for an authorized commercial license agreement.
+The exact license terms MUST be reviewed and finalized by legal counsel
+before any distribution, sale, or external use. No warranty, express or
+implied, is provided.
+
+THIRD-PARTY COMPONENTS
+----------------------
+Third-party components used by this software are governed by their own
+licenses. See NOTICE.md and the dependency manifests for details.
+
+COMPLIANCE NOTE
+---------------
+This file grants no claims of regulatory compliance or certification.
+Compliance posture is documented — not claimed — in docs/compliance/.

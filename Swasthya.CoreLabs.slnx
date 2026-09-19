@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Swasthya.CoreLabs.Api/Swasthya.CoreLabs.Api.csproj" />
+    <Project Path="src/Swasthya.CoreLabs.Application/Swasthya.CoreLabs.Application.csproj" />
+    <Project Path="src/Swasthya.CoreLabs.Domain/Swasthya.CoreLabs.Domain.csproj" />
+    <Project Path="src/Swasthya.CoreLabs.Infrastructure/Swasthya.CoreLabs.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Swasthya.CoreLabs.Api.Tests/Swasthya.CoreLabs.Api.Tests.csproj" />
+    <Project Path="tests/Swasthya.CoreLabs.Persistence.Tests/Swasthya.CoreLabs.Persistence.Tests.csproj" />
+    <Project Path="tests/Swasthya.CoreLabs.Tests/Swasthya.CoreLabs.Tests.csproj" />
+    <Project Path="tests/Swasthya.CoreLabs.TestSupport/Swasthya.CoreLabs.TestSupport.csproj" />
+  </Folder>
+</Solution>

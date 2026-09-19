@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EFCore.NamingConventions" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Swasthya.CoreLabs.Application\Swasthya.CoreLabs.Application.csproj" />
+    <ProjectReference Include="..\..\src\Swasthya.CoreLabs.Infrastructure\Swasthya.CoreLabs.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
